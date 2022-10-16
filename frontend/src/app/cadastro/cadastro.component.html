@@ -1,0 +1,45 @@
+<div>
+  <h2>Cadastro</h2>
+</div>
+<div>
+  <form [formGroup]="this.clientForm">
+    <div>
+      <div class="row">
+        <div class="col">
+          <label class="form-label">Nome</label>
+          <input id="nome" type="text" class="form-control" placeholder="Nome" aria-label="Nome" formControlName="nome"
+            name="nome">
+          <div class="validation" *ngIf="!this.clientForm.get('nome')?.valid && this.clientForm.get('nome')?.touched">
+            {{invalidField}}
+          </div>
+        </div>
+
+        <div class="col">
+          <label class="form-label">email</label>
+          <input id="email" type="text" class="form-control" placeholder="email" aria-label="email"
+            formControlName="email" name="email">
+          <div class="validation" *ngIf="!this.clientForm.get('email')?.valid && this.clientForm.get('email')?.touched">
+            {{invalidField}}
+          </div>
+
+        </div>
+
+        <div class="col">
+          <label class="form-label">senha</label>
+          <input id="senha" class="form-control" type="text" placeholder="senha" ria-label="senha"
+            formControlName="psenhais" name="pis">
+          <div class="validation" *ngIf="!this.clientForm.get('senha')?.valid && this.clientForm.get('senha')?.touched">
+          </div>
+        </div>
+
+
+        <div>
+          <button type="submit" class="btn btn-primary btn-block" (click)="this.registrar()">Registrar</button>
+        </div>
+
+
+      </div>
+    </div>
+
+  </form>
+</div>
