@@ -1,1 +1,19 @@
-<p>pontos-turisticos works!</p>
+<div class="container-fluid">
+  <h4>Tabela de Pontos turisticos</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome do ponto turistico</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="this.pontosTuristicos?.length > 0; else listaVazia">
+      <tr *ngFor="let pontoTuristico of this.pontosTuristicos">
+        <td>{{pontoTuristico.nome}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #listaVazia>
+    <p>Nenhum ponto turistico cadastrado</p>
+  </ng-template>
+</div>

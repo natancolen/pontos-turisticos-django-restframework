@@ -18,7 +18,7 @@ const routes: Routes = [
       import('./cadastro/cadastro.module').then((m) => m.CadastroModule),
   },
   {
-    path: 'pontos-turisticos',
+    path: 'pontoturistico',
     loadChildren: () =>
       import('./pontos-turisticos/pontos-turisticos.module').then(
         (m) => m.PontosTuristicosModule
