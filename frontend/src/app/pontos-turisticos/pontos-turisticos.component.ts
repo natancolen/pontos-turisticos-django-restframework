@@ -14,7 +14,10 @@ export class PontosTuristicosComponent implements OnInit {
       (pontoTuristico) => {
         this.pontosTuristicos = pontoTuristico;
       }
-    );
+    ),
+      (error: any) => {
+        return console.log(error);
+      };
   }
 
   ngOnInit(): void {}

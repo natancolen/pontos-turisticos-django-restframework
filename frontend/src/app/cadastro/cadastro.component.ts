@@ -89,15 +89,18 @@ export class CadastroComponent implements OnInit {
       return;
     }
 
-    this.pontoTuristicoService.adicionar(
-      this.pontoTuristicoForm.getRawValue(),
-      this.atracaoForm.getRawValue(),
-      this.comentariosForm.getRawValue(),
-      this.avaliacoesForm.getRawValue(),
-      this.enderecoForm.getRawValue()
-    );
+    this.pontoTuristicoService
+      .adicionarPontoTuristico(this.pontoTuristicoForm.getRawValue())
+      .subscribe(
+        (resq) => {
+          console.log(resq);
 
-    this.router.navigate(['pontoturistico']);
+          this.router.navigate(['pontoturistico']);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   limparDados() {

@@ -50,20 +50,20 @@ export class PontosTuristicosService {
     const avaliacoes = avaliacao;
     const enderecos = endereco;
 
-    return this.http.post(
-      this.url + this.urlPontoTuristico,
-      dadosPontoTuristicos
-    );
+    // return this.http.post(
+    //   this.url + this.urlPontoTuristico,
+    //   dadosPontoTuristicos
+    // );
 
-    // return this.http.post(this.apiRoot.concat('pontoturistico/'), {
-    //   nome,
-    //   descricao,
-    //   aprovado,
-    //   atracoes,
-    //   comentarios,
-    //   avaliacoes,
-    //   enderecos,
-    // });
+    return this.http.post(this.apiRoot.concat('pontoturistico/'), {
+      nome,
+      descricao,
+      aprovado,
+      atracoes,
+      comentarios,
+      avaliacoes,
+      enderecos,
+    });
   }
 
   adicionarPontoTuristico(pontoTuristico: any) {
