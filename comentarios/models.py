@@ -7,5 +7,10 @@ class Comentario(models.Model):
     data = models.DateField(auto_now_add=True)
     aprovado = models.BooleanField(default=True)
 
+    @property
+    def descricao_completa(self):
+        return '%s -%s' % (self.usuario.username, self.comentarios)
+
     def __str__(self):
-        return  self.usuario.username
+        return self.comentarios
+        # return self.usuario.username

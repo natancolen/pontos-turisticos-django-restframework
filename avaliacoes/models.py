@@ -7,6 +7,10 @@ class Avaliacao(models.Model):
     nota = models.DecimalField(max_digits=3, decimal_places=2)
     data = models.DateField(auto_now_add=True)
 
-    def __str__(self):
-        return self.user.username
+    @property
+    def descricao_completa(self):
+        return '%s - %s' % (self.user.username, self.comentario)
 
+    def __str__(self):
+        return self.comentario
+        # return self.user.username

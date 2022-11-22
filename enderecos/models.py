@@ -9,3 +9,10 @@ class Endereco(models.Model):
     pais = models.CharField(max_length=150)
     latitude = models.IntegerField(null=True,blank=True)
     longitude = models.IntegerField(null=True,blank=True)
+
+    @property
+    def descricao_completa(self):
+        return '%s - %s' % (self.linha1, self.linha2)
+
+    def __str__(self):
+        return self.linha1
