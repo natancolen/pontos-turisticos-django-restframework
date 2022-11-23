@@ -5,5 +5,5 @@ from comentarios.models import Comentario
 class ComentarioSerializer(ModelSerializer):
     class Meta:
         model = Comentario
-        fields = '__all__'
-        # fields = ('id', 'usuario', 'comentarios', 'data', 'aprovado')
+        # fields = '__all__'
+        fields = ('id', 'usuario', 'comentarios', 'data', 'aprovado')

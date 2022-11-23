@@ -11,8 +11,8 @@ from .serializers import PontoTuristicoSerializer
 class PontoTuristicoViewSet(ModelViewSet):
     serializer_class = PontoTuristicoSerializer
     filter_backends = [filters.SearchFilter]
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication,]
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication,]
     search_fields = ['nome', 'descricao','endereco__linha1']
 
     def get_queryset(self):
@@ -32,14 +32,8 @@ class PontoTuristicoViewSet(ModelViewSet):
 
         return queryset
 
-    # def list(self, request, *args, **kwargs):
-    #     queryset = self.get_queryset()
-    #     serializer = PontoTuristicoSerializer(queryset, many=True)
-    #     return Response(serializer.data)
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = PontoTuristicoSerializer(queryset, many=True)
+        return Response(serializer.data)
 
-    # def retrieve(self, request, *args, **kwargs):
-    #     return super(PontoTuristicoViewSet, self).retrieve(request, *args, **kwargs)
-    # def update(self, request, *args, **kwargs):
-    #     return super(PontoTuristicoViewSet, self).update(request, *args, **kwargs)
-    # def partial_update(self, request, *args, **kwargs):
-    #     return super(PontoTuristicoViewSet, self).partial_update(request, *args, **kwargs)
