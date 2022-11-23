@@ -1,5 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from core.models import PontoTuristico
@@ -9,6 +11,8 @@ from .serializers import PontoTuristicoSerializer
 class PontoTuristicoViewSet(ModelViewSet):
     serializer_class = PontoTuristicoSerializer
     filter_backends = [filters.SearchFilter]
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication,]
     search_fields = ['nome', 'descricao','endereco__linha1']
 
     def get_queryset(self):
@@ -33,7 +37,9 @@ class PontoTuristicoViewSet(ModelViewSet):
     #     serializer = PontoTuristicoSerializer(queryset, many=True)
     #     return Response(serializer.data)
 
-    def update(self, request, pk):
-        item = self.get_object()
-        serializer = self.get_serializer(item)
-        return Response(serializer.data)
+    # def retrieve(self, request, *args, **kwargs):
+    #     return super(PontoTuristicoViewSet, self).retrieve(request, *args, **kwargs)
+    # def update(self, request, *args, **kwargs):
+    #     return super(PontoTuristicoViewSet, self).update(request, *args, **kwargs)
+    # def partial_update(self, request, *args, **kwargs):
+    #     return super(PontoTuristicoViewSet, self).partial_update(request, *args, **kwargs)
