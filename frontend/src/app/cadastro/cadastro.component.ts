@@ -14,7 +14,7 @@ export class CadastroComponent implements OnInit {
   public pontoTuristicoForm = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.maxLength(150)]),
     descricao: new FormControl('', [Validators.required]),
-    aprovado: new FormControl('', [
+    aprovado: new FormControl(false, [
       Validators.required,
       Validators.requiredTrue,
     ]),
@@ -76,34 +76,84 @@ export class CadastroComponent implements OnInit {
     longitude: new FormControl('', Validators.required),
   });
 
-  constructor(
-    private router: Router,
-    private pontoTuristicoService: PontosTuristicosService
-  ) {}
+  constructor(private router: Router, private pontoTuristicoService: PontosTuristicosService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(){
+    this.getPontoTuristicoId();
+  }
 
+  /**
+   *
+   * @returns
+   */
   confirmar() {
     if (!this.pontoTuristicoForm) {
       alert(this.invalidField);
       return;
     }
 
-    this.pontoTuristicoService
-      .adicionarPontoTuristico(this.pontoTuristicoForm.getRawValue())
-      .subscribe(
-        (resq) => {
-          console.log(resq);
+    if(this.pontoTuristicoService.getTemIdPontoTuristico){
+      //this.patchPontoTuristico();
+    }
+    else{
+      this.postPontoTuristico();
+    }
 
-          this.router.navigate(['pontoturistico']);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    this.router.navigate(['pontoturistico']);
+    this.pontoTuristicoService.pontoTuristicoId(-1);
   }
 
+  /**
+   *
+   */
   limparDados() {
     this.pontoTuristicoForm.clearValidators();
   }
+
+/**
+ * @description Função para buscar pontos turisticos
+ */
+ getPontoTuristicoId(){
+  if(this.pontoTuristicoService.getTemIdPontoTuristico){
+    let id:number = this.pontoTuristicoService.getIdPontoTuristico;
+
+    this.pontoTuristicoService.getHttpPontoTuristicoId(id).subscribe(
+      (pontoTuristico:any) => {
+        this.pontoTuristicoForm.patchValue(pontoTuristico);
+        console.log(pontoTuristico)
+      }
+    ),
+      (error: any) => {
+        return console.log(error);
+      };
+  }
+}
+
+/**
+ *
+ */
+patchPontoTuristico(){
+  this.pontoTuristicoService.patchPontoTuristico(this.pontoTuristicoForm.getRawValue()).subscribe(
+    (resq:any) => {
+      console.log(resq);
+    }),
+    (error:any) => {
+      return console.log(error);
+    };
+}
+
+/**
+ *
+ */
+postPontoTuristico(){
+  this.pontoTuristicoService.postPontoTuristico(this.pontoTuristicoForm.getRawValue()).subscribe(
+    (resq:any) => {
+      console.log(resq);
+    }
+  ),
+  (error:any) => {
+     return console.log(error);
+  };
+}
+
 }

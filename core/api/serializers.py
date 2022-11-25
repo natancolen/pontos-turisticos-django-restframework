@@ -12,16 +12,17 @@ from enderecos.models import Endereco
 
 
 class PontoTuristicoSerializer(ModelSerializer):
-    atracoes = AtracaoSerializer(many=True)
-    endereco = EnderecoSerializer()
-    descricao_completa = SerializerMethodField()
+    # atracoes = AtracaoSerializer(many=True)
+    # endereco = EnderecoSerializer()
+    # descricao_completa = SerializerMethodField()
 
     class Meta:
         model = PontoTuristico
         fields = (
             'id', 'nome', 'descricao', 'aprovado', 'atracoes', 'comentarios', 'avaliacoes', 'endereco'
         )
-        read_onlyne_fields=('comentarios', 'avaliacoes')
+        # read_onlyne_fields=('comentarios', 'avaliacoes')
+
 
     # def criar_atracoes(self, atracoes, ponto):
     #     for atracao in atracoes:

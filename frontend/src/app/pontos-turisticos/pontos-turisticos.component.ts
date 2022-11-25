@@ -1,3 +1,5 @@
+import { CadastroComponent } from './../cadastro/cadastro.component';
+import { Router } from '@angular/router';
 import { PontosTuristicosService } from './../services/pontos-turisticos.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,11 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pontos-turisticos.component.css'],
 })
 export class PontosTuristicosComponent implements OnInit {
-  pontosTuristicos: any;
+  public pontosTuristicos: any;
+  public pontoTuristicoId?: number;
 
-  constructor(private pontoTuristicoService: PontosTuristicosService) {
+  constructor(private pontoTuristicoService: PontosTuristicosService, private router: Router) {}
+
+  ngOnInit() {
+    this.getPontoTuristico()
+
+    this.pontoTuristicoService.pontoTuristicoId(-1);
+  }
+
+/**
+ * @description Função para buscar pontos turisticos
+ */
+  getPontoTuristico(){
     this.pontoTuristicoService.getHttpPontoTuristico.subscribe(
-      (pontoTuristico) => {
+      (pontoTuristico:any) => {
+        console.log(pontoTuristico)
         this.pontosTuristicos = pontoTuristico;
       }
     ),
@@ -20,5 +35,13 @@ export class PontosTuristicosComponent implements OnInit {
       };
   }
 
-  ngOnInit(): void {}
+
+  updatePontoTuristico(id: number){
+    this.pontoTuristicoService.pontoTuristicoId(id);
+
+    this.router.navigate(['cadastro'])
+  }
+
+
 }
+

@@ -1,14 +1,25 @@
 <div class="container-fluid">
   <h4>Tabela de Pontos turisticos</h4>
-  <table>
-    <thead>
+  <table class="table">
+    <thead class="thead-dark">
       <tr>
+        <th>#</th>
         <th>Nome do ponto turistico</th>
+        <th>descricao</th>
+        <th>Aprovado</th>
+        <th>Editar</th>
+        <th>Deletar</th>
       </tr>
     </thead>
+
     <tbody *ngIf="this.pontosTuristicos?.length > 0; else listaVazia">
       <tr *ngFor="let pontoTuristico of this.pontosTuristicos">
+        <th>{{pontoTuristico.id}}</th>
         <td>{{pontoTuristico.nome}}</td>
+        <td>{{pontoTuristico.descricao}}</td>
+        <td>{{pontoTuristico.aprovado}}</td>
+        <td><button type="submit" class="btn btn-dark" (click)="this.updatePontoTuristico(pontoTuristico.id)">editar</button></td>
+        <td><button type="button" class="btn btn-light">deletar</button></td>
       </tr>
     </tbody>
   </table>
