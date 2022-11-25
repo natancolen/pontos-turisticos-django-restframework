@@ -84,6 +84,7 @@ export class CadastroComponent implements OnInit {
 
   /**
    *
+   * @description confirmar, função salva as informações do formulário e faz post ou patch.
    * @returns
    */
   confirmar() {
@@ -93,7 +94,7 @@ export class CadastroComponent implements OnInit {
     }
 
     if(this.pontoTuristicoService.getTemIdPontoTuristico){
-      //this.patchPontoTuristico();
+      this.patchPontoTuristico();
     }
     else{
       this.postPontoTuristico();
@@ -104,14 +105,14 @@ export class CadastroComponent implements OnInit {
   }
 
   /**
-   *
+   * @description limparDados, função que limpa as informações do cadastro
    */
   limparDados() {
     this.pontoTuristicoForm.clearValidators();
   }
 
 /**
- * @description Função para buscar pontos turisticos
+ * @description getPontoTuristicoId, função que chama o método getTemIdPontoTuristico do PontoTuristicoService
  */
  getPontoTuristicoId(){
   if(this.pontoTuristicoService.getTemIdPontoTuristico){
@@ -131,11 +132,14 @@ export class CadastroComponent implements OnInit {
 
 /**
  *
+ * @description patchPontoTuristico, é uma função que chama o método patchPontoTuristico do PontoTuristicoService.
+ *
  */
 patchPontoTuristico(){
   this.pontoTuristicoService.patchPontoTuristico(this.pontoTuristicoForm.getRawValue()).subscribe(
-    (resq:any) => {
-      console.log(resq);
+    (pontoTuristico:any) => {
+        this.pontoTuristicoForm.patchValue(pontoTuristico);
+      console.log(pontoTuristico);
     }),
     (error:any) => {
       return console.log(error);
@@ -144,6 +148,7 @@ patchPontoTuristico(){
 
 /**
  *
+ *@description postPontoTuristico, é uma função que chama o método postPontoTuristico do PontoTuristicoService.
  */
 postPontoTuristico(){
   this.pontoTuristicoService.postPontoTuristico(this.pontoTuristicoForm.getRawValue()).subscribe(

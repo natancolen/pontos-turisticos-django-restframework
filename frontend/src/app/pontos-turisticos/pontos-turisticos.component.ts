@@ -21,7 +21,8 @@ export class PontosTuristicosComponent implements OnInit {
   }
 
 /**
- * @description Função para buscar pontos turisticos
+ *
+ * @description getPontoTuristico, função que chama o método getHttpPontoTuristico do PontoTuristicoService
  */
   getPontoTuristico(){
     this.pontoTuristicoService.getHttpPontoTuristico.subscribe(
@@ -35,13 +36,31 @@ export class PontosTuristicosComponent implements OnInit {
       };
   }
 
-
+  /**
+   *
+   * @description updatePontoTuristico, função que chama o método pontoTuristicoId do PontoTuristicoService
+   * @param id, parâmetro que recebe id do pontoTuristico do pontoturistico db django
+   *
+   */
   updatePontoTuristico(id: number){
     this.pontoTuristicoService.pontoTuristicoId(id);
 
     this.router.navigate(['cadastro'])
   }
 
+  /**
+   *
+   * @description deletePontoTuristico, função que chama o método deletePontoTuristico do PontoTuristicoService
+   * @param id, parâmetro que recebe id do pontoTuristico do pontoturistico db django
+   * @param pontoTuristico, parâmetro que recebe o próprio objeto do pontoTuristico do pontoturistico db django
+   */
+  deletePontoTuristico(id: number, pontoTuristico: any){
+    console.log('Delete')
+
+    this.pontoTuristicoService.deletePontoTuristico(id, pontoTuristico);
+
+    this.router.navigate(['home'])
+  }
 
 }
 

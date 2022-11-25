@@ -21,28 +21,22 @@ export class PontosTuristicosService {
 
   /**
    *
+   * @description getIdPontoTuristico, função que retorno o id do pontoTuristico que deseja procurar ou deletar.
    */
   get getIdPontoTuristico() {
     return this.idPontoTuristico;
   }
 
   /**
-   *
-   */
-  get getPontosTuristicos() {
-    return this.pontosTuristicos;
-  }
-
-  /**
-   *
-   */
+  * @description getHttpPontoTuristico, função que faz um get e retorno os objetos do pontosTuristico do db django.
+  */
   get getHttpPontoTuristico() {
     //return this.http.get(this.apiRoot.concat('pontoturistico'));
     return this.http.get(this.url + this.urlPontoTuristico);
   }
 
   /**
-   *
+   * @description getTemIdPontoTuristico, função que retorno um booleano se tem id salvo ou nao do pontoTuristico a ser procurado.
    */
   get getTemIdPontoTuristico() {
     return this.temIdPontoTuristico;
@@ -50,7 +44,8 @@ export class PontosTuristicosService {
 
   /**
    *
-   * @param id
+   * @description getHttpPontoTuristicoId, função que faz o get do pontoTuristico retornando apenas um objeto no db django que tenha o id buscado.
+   * @param id, parâmetro que faz referência ao próprio id do pontoTuristico que será buscado no db do django trazendo as informações do nome, descricao e aprovado.
    * @returns
    */
   getHttpPontoTuristicoId(id: number) {
@@ -109,11 +104,12 @@ export class PontosTuristicosService {
 
   /**
    *
-   * @param pontoTuristico
+   * @description postPontoTuristico, função que faz o post do pontoTuristico no db django.
+   * @param pontoTuristico, parâmetro que faz referência ao próprio objeto do pontoTuristico que será buscado no db do django para será criado as informações do pontoTuristico, tais como nome, descricao e aprovado.
    * @returns
    */
   postPontoTuristico(pontoTuristico: any) {
-    this.pontosTuristicos.push(pontoTuristico);
+    //this.pontosTuristicos.push(pontoTuristico);
 
     const nome = pontoTuristico.nome;
     const descricao = pontoTuristico.descricao;
@@ -127,22 +123,18 @@ export class PontosTuristicosService {
       });
   }
 
-  novoGetPontoTuristico(): Observable<PontosTuristicos>{
-    return this.http.get<PontosTuristicos>(this.apiRoot.concat('pontoturistico'));
-  }
-
-  novoPostPontoTuristico(pontoTuristico: PontosTuristicos): Observable<PontosTuristicos>{
-    return this.http.post<PontosTuristicos>(this.apiRoot.concat('pontoturistico'),{
-      pontoTuristico
-    });
-  }
-
+  /**
+   *
+   * @description patchPontoTuristico, função que faz o patch do pontoTuristico no db django.
+   * @param pontoTuristico , parâmetro que faz referência ao próprio objeto do pontoTuristico que será buscado no db do django para será editado as informações do pontoTuristico, tais como nome, descricao e aprovado.
+   * @returns
+   */
   patchPontoTuristico(pontoTuristico: any) {
     const nome = pontoTuristico.nome;
     const descricao = pontoTuristico.descricao;
     const aprovado = pontoTuristico.aprovado;
 
-    return this.http.patch(this.apiRoot.concat(`${this.url}${this.urlPontoTuristico}${this.idPontoTuristico}/`), {
+    return this.http.patch(this.apiRoot.concat(`${this.urlPontoTuristico}${this.idPontoTuristico}/`), {
       nome,
       descricao,
       aprovado,
@@ -150,7 +142,26 @@ export class PontosTuristicosService {
   }
 
   /**
-   * @descrition
+   *
+   * @description deletePontoTuristico, função que deleta o pontoTuristico no db django.
+   * @param id, parâmetro que faz referência o id do pontoTuristico que será buscado no db do django para ser deletado.
+   * @param pontoTuristico, parâmetro que faz referência ao próprio objeto do pontoTuristico que será buscado no db do django para ser deletado.
+   * @returns
+   */
+  deletePontoTuristico(id: number, pontoTuristico: any) {
+    return this.http.delete(this.apiRoot.concat(`${this.urlPontoTuristico}${id}/`)).subscribe(
+      (pontoT: any) =>{
+        pontoT = pontoTuristico;
+        console.log(pontoT);
+      }
+    ),
+    (error:any) =>{
+      return console.log(error);
+    };
+  }
+
+  /**
+   * @description pontoTuristicoId, função que salva o id do pontoTuristico que está no db do django
    *
    * @param id
    */

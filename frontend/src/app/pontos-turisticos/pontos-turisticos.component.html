@@ -19,7 +19,7 @@
         <td>{{pontoTuristico.descricao}}</td>
         <td>{{pontoTuristico.aprovado}}</td>
         <td><button type="submit" class="btn btn-dark" (click)="this.updatePontoTuristico(pontoTuristico.id)">editar</button></td>
-        <td><button type="button" class="btn btn-light">deletar</button></td>
+        <td><button type="button" class="btn btn-light" (click)="this.deletePontoTuristico(pontoTuristico.id, pontoTuristico)">deletar</button></td>
       </tr>
     </tbody>
   </table>
