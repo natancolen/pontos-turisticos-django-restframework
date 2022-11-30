@@ -1,28 +1,46 @@
 <div class="container-fluid">
-  <h4>Tabela de Pontos turisticos</h4>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th>#</th>
-        <th>Nome do ponto turistico</th>
-        <th>descricao</th>
-        <th>Aprovado</th>
-        <th>Editar</th>
-        <th>Deletar</th>
-      </tr>
-    </thead>
 
-    <tbody *ngIf="this.pontosTuristicos?.length > 0; else listaVazia">
-      <tr *ngFor="let pontoTuristico of this.pontosTuristicos">
-        <th>{{pontoTuristico.id}}</th>
-        <td>{{pontoTuristico.nome}}</td>
-        <td>{{pontoTuristico.descricao}}</td>
-        <td>{{pontoTuristico.aprovado}}</td>
-        <td><button type="submit" class="btn btn-dark" (click)="this.updatePontoTuristico(pontoTuristico.id)">editar</button></td>
-        <td><button type="button" class="btn btn-light" (click)="this.deletePontoTuristico(pontoTuristico.id, pontoTuristico)">deletar</button></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="input-group input-group-sm mb-3">
+    <br>
+    <input #busca type="text" class="formControl" placeholder="busca" aria-describedby="inputGroup-sizing-sm">
+    <button type="button" class="btn btn-secondary" (click)="this.buscar(busca.value)">Buscar</button>
+  </div>
+
+  <div>
+    <br>
+    <h4>Tabela de Pontos turisticos</h4>
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th>id</th>
+          <th>Nome do ponto turistico</th>
+          <th>descricao</th>
+          <th>Aprovado</th>
+          <!-- <th>Atrações</th>
+          <th>Comentários</th>
+          <th>Avaliações</th>
+          <th>Endereço</th> -->
+          <th>Editar</th>
+          <th>Deletar</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="this.pontosTuristicos?.length > 0; else listaVazia">
+        <tr *ngFor="let pontoTuristico of this.pontosTuristicos">
+          <th>{{pontoTuristico.id}}</th>
+          <td>{{pontoTuristico.nome}}</td>
+          <td>{{pontoTuristico.descricao}}</td>
+          <td>{{pontoTuristico.aprovado}}</td>
+          <!-- <td>{{pontoTuristico.atracoes}}</td>
+          <td>{{pontoTuristico.comentarios}}</td>
+          <td>{{pontoTuristico.avaliacoes}}</td>
+          <td>{{pontoTuristico.enderecos}}</td> -->
+          <td><button type="submit" class="btn btn-dark" (click)="this.updatePontoTuristico(pontoTuristico.id)">editar</button></td>
+          <td><button type="button" class="btn btn-light" (click)="this.deletePontoTuristico(pontoTuristico.id, pontoTuristico)">deletar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 
   <ng-template #listaVazia>
     <p>Nenhum ponto turistico cadastrado</p>

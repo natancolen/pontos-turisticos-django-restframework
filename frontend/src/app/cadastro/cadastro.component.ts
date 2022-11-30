@@ -1,4 +1,7 @@
+import { PontosTuristicos } from './../interfaces/pontosturisticos.interface';
+
 import { PontosTuristicosService } from './../services/pontos-turisticos.service';
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./cadastro.component.css'],
 })
 export class CadastroComponent implements OnInit {
+  public pontoTuristico!: PontosTuristicos;
   public invalidField = 'Campo inválido!';
 
   public pontoTuristicoForm = new FormGroup({
@@ -98,6 +102,7 @@ export class CadastroComponent implements OnInit {
     }
     else{
       this.postPontoTuristico();
+      this.postPontoTuristicoCompleto();
     }
 
     this.router.navigate(['pontoturistico']);
@@ -151,14 +156,24 @@ patchPontoTuristico(){
  *@description postPontoTuristico, é uma função que chama o método postPontoTuristico do PontoTuristicoService.
  */
 postPontoTuristico(){
+
   this.pontoTuristicoService.postPontoTuristico(this.pontoTuristicoForm.getRawValue()).subscribe(
-    (resq:any) => {
-      console.log(resq);
+    (pontoTuristico:any) => {
+      console.log(pontoTuristico);
     }
   ),
   (error:any) => {
      return console.log(error);
   };
+}
+
+postPontoTuristicoCompleto(){
+  this.pontoTuristicoService.postPontoTuriscticoCompleto(this.pontoTuristicoForm.getRawValue(),this.atracaoForm.getRawValue(), this.comentariosForm.getRawValue(), this.avaliacoesForm.getRawValue(), this.enderecoForm.getRawValue()).subscribe((pontoTuristico: any) =>{
+    console.log(pontoTuristico);
+  }),
+  (error:any)=>{
+    return console.log(error);
+  }
 }
 
 }

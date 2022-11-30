@@ -1,3 +1,4 @@
+import { FormGroup, Validators } from '@angular/forms';
 import { CadastroComponent } from './../cadastro/cadastro.component';
 import { Router } from '@angular/router';
 import { PontosTuristicosService } from './../services/pontos-turisticos.service';
@@ -11,23 +12,39 @@ import { Component, OnInit } from '@angular/core';
 export class PontosTuristicosComponent implements OnInit {
   public pontosTuristicos: any;
   public pontoTuristicoId?: number;
+  private fezBusca: boolean = false;
+  private pontosTuristicosBusca: string = '';
 
   constructor(private pontoTuristicoService: PontosTuristicosService, private router: Router) {}
 
   ngOnInit() {
-    this.getPontoTuristico()
+    this.getPontoTuristico();
 
     this.pontoTuristicoService.pontoTuristicoId(-1);
   }
 
+  buscar(pontoTuristico: string){
+    console.log('Buscado: ',pontoTuristico);
+
+    this.pontoTuristicoService.getBuscarPontosTuristicos(pontoTuristico).subscribe(
+      (pontoTuristico:any) =>{
+        this.pontosTuristicos = pontoTuristico;
+        console.log(pontoTuristico)
+      }
+    ),
+    (error:any) =>{
+      return console.log(error);
+    }
+  }
+
 /**
- *
  * @description getPontoTuristico, função que chama o método getHttpPontoTuristico do PontoTuristicoService
  */
   getPontoTuristico(){
-    this.pontoTuristicoService.getHttpPontoTuristico.subscribe(
+    this.pontoTuristicoService.getPontoTuristico().subscribe(
       (pontoTuristico:any) => {
         console.log(pontoTuristico)
+
         this.pontosTuristicos = pontoTuristico;
       }
     ),
