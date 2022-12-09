@@ -101,11 +101,9 @@ export class CadastroComponent implements OnInit {
       this.patchPontoTuristico();
     }
     else{
-      this.postPontoTuristico();
+      //his.postPontoTuristico();
       this.postPontoTuristicoCompleto();
     }
-
-    this.router.navigate(['pontoturistico']);
     this.pontoTuristicoService.pontoTuristicoId(-1);
   }
 
@@ -143,8 +141,10 @@ export class CadastroComponent implements OnInit {
 patchPontoTuristico(){
   this.pontoTuristicoService.patchPontoTuristico(this.pontoTuristicoForm.getRawValue()).subscribe(
     (pontoTuristico:any) => {
-        this.pontoTuristicoForm.patchValue(pontoTuristico);
-      console.log(pontoTuristico);
+    this.pontoTuristicoForm.patchValue(pontoTuristico);
+    console.log(pontoTuristico);
+
+    this.router.navigate(['pontoturistico']);
     }),
     (error:any) => {
       return console.log(error);
@@ -160,6 +160,8 @@ postPontoTuristico(){
   this.pontoTuristicoService.postPontoTuristico(this.pontoTuristicoForm.getRawValue()).subscribe(
     (pontoTuristico:any) => {
       console.log(pontoTuristico);
+
+      this.router.navigate(['pontoturistico']);
     }
   ),
   (error:any) => {

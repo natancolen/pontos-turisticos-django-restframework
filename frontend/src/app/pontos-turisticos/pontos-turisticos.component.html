@@ -16,10 +16,10 @@
           <th>Nome do ponto turistico</th>
           <th>descricao</th>
           <th>Aprovado</th>
-          <!-- <th>Atrações</th>
+          <th>Atrações</th>
           <th>Comentários</th>
           <th>Avaliações</th>
-          <th>Endereço</th> -->
+          <th>Endereço</th>
           <th>Editar</th>
           <th>Deletar</th>
         </tr>
@@ -30,10 +30,10 @@
           <td>{{pontoTuristico.nome}}</td>
           <td>{{pontoTuristico.descricao}}</td>
           <td>{{pontoTuristico.aprovado}}</td>
-          <!-- <td>{{pontoTuristico.atracoes}}</td>
+          <td>{{pontoTuristico.atracoes}}</td>
           <td>{{pontoTuristico.comentarios}}</td>
           <td>{{pontoTuristico.avaliacoes}}</td>
-          <td>{{pontoTuristico.enderecos}}</td> -->
+          <td>{{pontoTuristico.enderecos}}</td>
           <td><button type="submit" class="btn btn-dark" (click)="this.updatePontoTuristico(pontoTuristico.id)">editar</button></td>
           <td><button type="button" class="btn btn-light" (click)="this.deletePontoTuristico(pontoTuristico.id, pontoTuristico)">deletar</button></td>
         </tr>

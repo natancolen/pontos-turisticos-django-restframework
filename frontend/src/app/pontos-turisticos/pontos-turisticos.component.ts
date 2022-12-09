@@ -26,7 +26,7 @@ export class PontosTuristicosComponent implements OnInit {
   buscar(pontoTuristico: string){
     console.log('Buscado: ',pontoTuristico);
 
-    this.pontoTuristicoService.getBuscarPontosTuristicos(pontoTuristico).subscribe(
+    this.pontoTuristicoService.getBuscarPontosTuristicos('?search='+pontoTuristico).subscribe(
       (pontoTuristico:any) =>{
         this.pontosTuristicos = pontoTuristico;
         console.log(pontoTuristico)
@@ -74,10 +74,17 @@ export class PontosTuristicosComponent implements OnInit {
   deletePontoTuristico(id: number, pontoTuristico: any){
     console.log('Delete')
 
-    this.pontoTuristicoService.deletePontoTuristico(id, pontoTuristico);
+    this.pontoTuristicoService.deletePontoTuristico(id, pontoTuristico).subscribe(
+      (pontoT: any) =>{
+        pontoT = pontoTuristico;
+        console.log(pontoT);
 
-    this.router.navigate(['home'])
+        this.buscar('');
+      }
+    ),
+    (error:any) =>{
+      return console.log(error);
+    };
   }
-
 }
 

@@ -4,5 +4,5 @@ from avaliacoes.models import Avaliacao
 class AvaliacaoSerializer(ModelSerializer):
     class Meta:
         model = Avaliacao
-        fields = '__all__'
-        # fields =('id','user','comentario', 'nota', 'data')
+        # fields = '__all__'
+        fields =('id','user','comentario', 'nota', 'data')
